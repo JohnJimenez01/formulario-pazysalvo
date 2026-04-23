@@ -1,713 +1,474 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solicitud de Paz y Salvo — Gestión Humana</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --white: #ffffff;
-      --green: #1a8a4a;
-      --green-light: #22a85a;
-      --green-dark: #136638;
-      --blue: #0b4ea8;
-      --blue-light: #1a6cd4;
-      --blue-pale: #e8f0fb;
-      --blue-pale2: #d0e4fa;
-      --gray: #f5f7fa;
-      --gray2: #e9ecf0;
-      --text: #1a2333;
-      --text-soft: #5a6478;
-      --radius: 14px;
-      --shadow: 0 8px 40px rgba(11,78,168,0.13);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunicado Jornada #7 – 26 Abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark:   #060912;
+    --sur:    rgba(255,255,255,0.04);
+    --brd:    rgba(255,255,255,0.08);
+    --brdh:   rgba(255,255,255,0.16);
+    --muted:  rgba(200,212,240,0.55);
+    --accent: #8eafd4;
+    --dust:   #b0bdd8;
+    --neon:   #e8f4ff;
+    --gold:   #c9a96e;
+    --warn:   #c97a4a;
+    --ok:     #6aaa8a;
+    --lila:   #b89ec9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);font-family:'Exo 2',sans-serif;color:var(--neon);overflow-x:hidden;}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .nebula{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 50% at 5% 10%,rgba(80,100,180,.10) 0%,transparent 60%),
+      radial-gradient(ellipse 50% 40% at 95% 75%,rgba(100,80,160,.08) 0%,transparent 55%),
+      radial-gradient(ellipse 60% 60% at 50% 50%,rgba(60,80,140,.05) 0%,transparent 70%),
+      radial-gradient(ellipse 45% 70% at 20% 90%,rgba(80,60,120,.07) 0%,transparent 55%);}
+  canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+  .page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:44px 22px 72px;}
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;}
+  .rv.in{opacity:1;transform:translateY(0);}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: linear-gradient(135deg, #0b4ea8 0%, #1a8a4a 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 40px 16px 60px;
-      position: relative;
-      overflow-x: hidden;
-    }
+  /* HEADER */
+  .hdr{text-align:center;margin-bottom:40px;}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(142,175,212,.3);
+    border-radius:40px;padding:5px 20px;font-family:'Orbitron',sans-serif;
+    font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:16px;}
+  .htitle{font-family:'Orbitron',sans-serif;font-size:clamp(20px,4.5vw,46px);font-weight:900;
+    line-height:1.05;color:var(--neon);letter-spacing:1px;margin-bottom:7px;
+    text-shadow:0 0 40px rgba(180,220,255,.35),0 0 80px rgba(140,180,255,.15);}
+  .hsub{font-family:'Orbitron',sans-serif;font-size:clamp(9px,1.5vw,11px);color:var(--muted);letter-spacing:3px;}
+  .hcorredor{margin-top:12px;display:inline-block;border:1px solid rgba(201,169,110,.22);
+    border-radius:8px;padding:6px 16px;font-size:12px;color:var(--gold);letter-spacing:.7px;}
+  .dpill{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:11px 22px;
+    border-radius:50px;font-weight:700;font-size:14px;
+    border:1px solid rgba(142,175,212,.28);color:var(--neon);background:rgba(142,175,212,.05);}
+  .pnum{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;opacity:.55;text-transform:uppercase;}
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 20% 10%, rgba(26,138,74,0.22) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(11,78,168,0.28) 0%, transparent 65%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  /* DIVIDER */
+  .dv{display:flex;align-items:center;gap:10px;margin:22px 0;}
+  .dv .ln{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(142,175,212,.22),transparent);}
+  .dv .dt{width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.55;}
 
-    /* Geometric decorations */
-    body::after {
-      content: '';
-      position: fixed;
-      top: -80px; right: -80px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.08);
-      pointer-events: none;
-      z-index: 0;
-    }
+  /* SECTION LABEL */
+  .sl{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--neon);margin-bottom:10px;display:flex;align-items:center;gap:8px;
+    text-shadow:0 0 18px rgba(180,220,255,.25);}
+  .sl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(220,238,255,.2),transparent);}
 
-    .card {
-      position: relative;
-      z-index: 1;
-      background: var(--white);
-      border-radius: 24px;
-      box-shadow: var(--shadow), 0 2px 8px rgba(26,138,74,0.08);
-      width: 100%;
-      max-width: 580px;
-      overflow: hidden;
-      animation: cardIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
-    }
+  /* CARD */
+  .card{background:rgba(255,255,255,0.02);border:1px solid var(--brd);border-radius:14px;padding:20px 24px;
+    margin-bottom:14px;backdrop-filter:blur(12px);position:relative;overflow:hidden;
+    transition:border-color .3s,transform .3s;}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,rgba(142,175,212,.25),transparent);}
+  .card:hover{border-color:var(--brdh);transform:translateY(-2px);}
+  .ch{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
+  .ci{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    font-size:17px;flex-shrink:0;background:rgba(255,255,255,.04);border:1px solid var(--brd);}
+  .ct{font-family:'Orbitron',sans-serif;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--neon);text-shadow:0 0 14px rgba(180,220,255,.25);}
+  .cs{font-size:11px;color:var(--muted);margin-top:2px;}
 
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(32px) scale(0.97); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
+  /* BULLETS */
+  .bl{list-style:none;margin-top:6px;}
+  .bl li{display:flex;align-items:flex-start;gap:9px;padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,.04);color:var(--dust);font-size:13px;line-height:1.55;}
+  .bl li:last-child{border-bottom:none;}
+  .bd{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--accent);opacity:.7;}
+  .bw{background:var(--warn);opacity:.8;}
+  .bg{background:var(--gold);opacity:.8;}
 
-    /* ── Header ── */
-    .header {
-      background: linear-gradient(120deg, var(--blue) 0%, var(--blue-light) 55%, var(--green) 100%);
-      padding: 36px 36px 28px;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
 
-    .header::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; right: -40px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
+  /* REPORTES */
+.rep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  gap:12px;
+  margin-top:8px;
+  justify-content:center;
+}
 
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+.rep-item{
+  background:var(--sur);
+  border:1px solid var(--brd);
+  border-radius:11px;
+  padding:14px;
+  position:relative;
+  overflow:hidden;
+  transition:all .25s;
+  text-align:center;
+}
 
-    .logo-icon {
-      width: 44px; height: 44px;
-      background: rgba(255,255,255,0.18);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.25);
-    }
+.rep-item::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:var(--accent);
+  opacity:.45;
+}
 
-    .logo-text {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 18px;
-      letter-spacing: 0.5px;
-    }
-    .logo-sub {
-      font-size: 11px;
-      opacity: 0.75;
-      font-weight: 400;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+.rep-item:hover{
+  border-color:var(--brdh);
+  transform:translateY(-3px) scale(1.02);
+}
 
-    .header h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 26px;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
+.ritime{
+  font-family:'Orbitron',sans-serif;
+  font-size:15px;
+  font-weight:900;
+  color:var(--neon);
+  margin-bottom:4px;
+}
 
-    .header p {
-      font-size: 14px;
-      opacity: 0.85;
-      line-height: 1.5;
-    }
+.rilabel{
+  font-size:12px;
+  color:var(--dust);
+  line-height:1.4;
+}
 
-    .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 20px;
-      padding: 5px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      margin-top: 14px;
-      backdrop-filter: blur(4px);
-    }
+.riico{
+  font-size:18px;
+  margin-bottom:8px;
+  display:block;
+  opacity:.8;
+}
 
-    .status-pill::before {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: #7eeea0;
-      animation: pulse 2s infinite;
-    }
+  /* CALLOUT */
+  .callout{display:flex;gap:11px;border-radius:9px;padding:11px 14px;margin-top:10px;
+    border-left:2px solid var(--clc,var(--gold));background:rgba(255,255,255,.02);}
+  .callout .cico{font-size:15px;flex-shrink:0;opacity:.75;}
+  .callout .ctxt{font-size:12.5px;color:var(--dust);line-height:1.55;}
+  .callout .ctxt strong{color:var(--neon);}
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+  /* REGLAMENTO */
+  .reg-item{background:var(--sur);border:1px solid var(--brd);border-radius:11px;
+    margin-bottom:7px;overflow:hidden;cursor:pointer;transition:border-color .25s;}
+  .reg-item:hover,.reg-item.open{border-color:var(--brdh);}
+  .reg-head{display:flex;align-items:center;gap:11px;padding:13px 16px;user-select:none;}
+  .reg-num{font-family:'Orbitron',sans-serif;font-size:10.5px;font-weight:700;
+    color:var(--neon);min-width:22px;text-shadow:0 0 10px rgba(180,220,255,.25);}
+  .reg-title{flex:1;font-size:13px;font-weight:500;color:var(--neon);text-shadow:0 0 8px rgba(180,220,255,.12);}
+  .reg-tag{font-size:9.5px;padding:2px 9px;border-radius:20px;border:1px solid var(--brd);
+    color:var(--muted);font-family:'Orbitron',sans-serif;letter-spacing:1px;flex-shrink:0;}
+  .reg-arr{font-size:10px;color:var(--accent);transition:transform .25s;flex-shrink:0;opacity:.65;}
+  .reg-item.open .reg-arr{transform:rotate(180deg);}
+  .reg-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);}
+  .reg-item.open .reg-body{max-height:500px;}
+  .reg-inner{padding:0 16px 14px;font-size:12.5px;color:var(--dust);line-height:1.6;
+    border-top:1px solid rgba(255,255,255,.04);}
+  .reg-inner p{padding-top:10px;}
+  .reg-inner strong{color:var(--neon);}
 
-    /* ── Progress bar ── */
-    .progress-bar {
-      height: 4px;
-      background: var(--gray2);
-      position: relative;
-      overflow: hidden;
-    }
+  /* CODES */
+  .code-row{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:9px;}
+  .cbadge{font-family:'Orbitron',sans-serif;font-size:17px;font-weight:900;
+    padding:8px 16px;border-radius:9px;border:1px solid var(--brd);}
+  .c57{color:var(--warn);}
+  .c58{color:var(--ok);}
 
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--blue), var(--green));
-      transition: width 0.4s ease;
-    }
+  /* DRIVE */
+  .drive-row{display:flex;align-items:center;gap:13px;background:var(--sur);border:1px solid var(--brd);
+    border-radius:11px;padding:13px 16px;margin-top:10px;transition:all .25s;text-decoration:none;}
+  .drive-row:hover{border-color:var(--brdh);transform:translateY(-2px);}
+  .drive-info{flex:1;}
+  .drive-t{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:2px;}
+  .drive-d{font-size:11.5px;color:var(--muted);}
+  .drive-btn{border:1px solid var(--brd);border-radius:7px;padding:6px 13px;
+    font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:1.5px;color:var(--accent);
+    flex-shrink:0;transition:border-color .25s;}
+  .drive-row:hover .drive-btn{border-color:var(--brdh);}
 
-    /* ── Body ── */
-    .body {
-      padding: 32px 36px 36px;
-    }
+  /* BETA CARD */
+  .beta-card{
+    display:flex;align-items:center;gap:16px;
+    background:rgba(184,158,201,.06);
+    border:1px solid rgba(184,158,201,.25);
+    border-radius:14px;padding:18px 22px;margin-bottom:14px;
+    position:relative;overflow:hidden;}
+  .beta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,rgba(184,158,201,.5),rgba(142,175,212,.3),transparent);}
+  .beta-avatar{
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,rgba(184,158,201,.3),rgba(142,175,212,.2));
+    border:1px solid rgba(184,158,201,.3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;flex-shrink:0;}
+  .beta-info{}
+  .beta-role{font-family:'Orbitron',sans-serif;font-size:8.5px;letter-spacing:2.5px;
+    color:var(--lila);text-transform:uppercase;margin-bottom:4px;}
+  .beta-name{font-size:15px;font-weight:600;color:var(--neon);margin-bottom:3px;
+    text-shadow:0 0 10px rgba(180,220,255,.12);}
+  .beta-contact{font-size:12px;color:var(--muted);}
 
-    .section-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+  /* FINAL */
+  .final{text-align:center;border:1px solid rgba(255,255,255,.06);border-radius:14px;
+    padding:26px 20px;margin-top:6px;position:relative;overflow:hidden;}
+  .final::before{content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(80,100,160,.07) 0%,transparent 70%);pointer-events:none;}
+  .ficon{font-size:34px;display:block;margin-bottom:8px;animation:flt 4s ease-in-out infinite;}
+  @keyframes flt{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+  .final p{font-size:clamp(12px,1.9vw,14px);color:var(--dust);line-height:1.75;position:relative;z-index:1;}
+  .final strong{color:var(--neon);}
 
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--gray2);
-    }
-
-    .field {
-      margin-bottom: 20px;
-      animation: fieldIn 0.4s ease both;
-    }
-
-    @keyframes fieldIn {
-      from { opacity: 0; transform: translateX(-10px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .field:nth-child(1)  { animation-delay: 0.05s; }
-    .field:nth-child(2)  { animation-delay: 0.10s; }
-    .field:nth-child(3)  { animation-delay: 0.15s; }
-    .field:nth-child(4)  { animation-delay: 0.20s; }
-    .field:nth-child(5)  { animation-delay: 0.25s; }
-    .field:nth-child(6)  { animation-delay: 0.30s; }
-
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    label .req {
-      color: var(--green);
-      margin-left: 2px;
-    }
-
-    label .opt {
-      font-size: 11px;
-      color: var(--text-soft);
-      font-weight: 400;
-      margin-left: 4px;
-    }
-
-    input, select {
-      width: 100%;
-      height: 46px;
-      border: 1.5px solid var(--gray2);
-      border-radius: 10px;
-      padding: 0 14px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      background: var(--white);
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-
-    input::placeholder { color: #b0b8c9; }
-
-    input:focus, select:focus {
-      border-color: var(--blue-light);
-      box-shadow: 0 0 0 3px var(--blue-pale);
-      background: #fdfeff;
-    }
-
-    input.valid { border-color: var(--green); }
-    input.error, select.error { border-color: #e0452e; box-shadow: 0 0 0 3px #fde8e4; }
-
-    .error-msg {
-      font-size: 12px;
-      color: #e0452e;
-      margin-top: 4px;
-      display: none;
-    }
-
-    .field.has-error .error-msg { display: block; }
-
-    .select-wrap {
-      position: relative;
-    }
-
-    .select-wrap::after {
-      content: '▾';
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-soft);
-      pointer-events: none;
-      font-size: 16px;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 480px) {
-      .row-2 { grid-template-columns: 1fr; }
-      .body { padding: 24px 20px 28px; }
-      .header { padding: 28px 20px 22px; }
-    }
-
-    /* ── Button ── */
-    .submit-btn {
-      width: 100%;
-      height: 52px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(120deg, var(--blue) 0%, var(--green) 100%);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      margin-top: 28px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(11,78,168,0.28);
-    }
-
-	.submit-btn:disabled:hover {
-	  transform: none;
-	  box-shadow: none;
-	}
-	
-	.submit-btn:disabled {
-	  opacity: 0.6;
-	  cursor: not-allowed;
-	  transform: none;
-	  box-shadow: none;
-	}
-	
-    .submit-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 28px rgba(11,78,168,0.35);
-    }
-
-    .submit-btn:active { transform: translateY(1px); }
-
-    .submit-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0);
-      transition: background 0.2s;
-    }
-
-    .submit-btn:hover::after { background: rgba(255,255,255,0.07); }
-
-    .submit-btn .btn-text { position: relative; z-index: 1; }
-
-    .submit-btn.loading .btn-text::after {
-      content: '';
-      display: inline-block;
-      width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin-left: 10px;
-      vertical-align: middle;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── Success ── */
-    .success-screen {
-      display: none;
-      padding: 48px 36px;
-      text-align: center;
-      animation: cardIn 0.5s ease both;
-    }
-
-    .success-icon {
-      width: 80px; height: 80px;
-      background: linear-gradient(135deg, var(--blue-pale), #c6f0d8);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
-      margin: 0 auto 20px;
-      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
-    }
-
-    @keyframes pop {
-      from { transform: scale(0); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
-    }
-
-    .success-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-
-    .success-msg {
-      font-size: 14px;
-      color: var(--text-soft);
-      line-height: 1.6;
-      max-width: 380px;
-      margin: 0 auto 24px;
-    }
-
-    .success-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--blue-pale);
-      color: var(--blue);
-      border-radius: 20px;
-      padding: 8px 18px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* ── Footer ── */
-    .footer {
-      padding: 16px 36px;
-      border-top: 1px solid var(--gray2);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-brand {
-      font-size: 11px;
-      color: var(--text-soft);
-      font-weight: 500;
-    }
-
-    .footer-secure {
-      font-size: 11px;
-      color: var(--green);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-  </style>
+  /* FOOTER */
+  .footer{text-align:center;margin-top:40px;padding-top:18px;border-top:1px solid rgba(255,255,255,.05);}
+  .footer-name{font-family:'Orbitron',sans-serif;font-size:clamp(10px,1.6vw,13px);font-weight:600;
+    letter-spacing:1.8px;color:var(--neon);margin-bottom:4px;
+    text-shadow:0 0 16px rgba(200,230,255,.45),0 0 36px rgba(160,200,255,.2);}
+  .footer-sub{font-family:'Orbitron',sans-serif;font-size:clamp(8px,1.1vw,10px);
+    letter-spacing:2.5px;color:var(--neon);opacity:.35;margin-bottom:10px;}
+  .footer-div{width:60px;height:1px;background:rgba(255,255,255,.08);margin:10px auto;}
+</style>
 </head>
 <body>
-<div class="card">
+
+<div class="nebula"></div>
+<canvas id="stars"></canvas>
+
+<div class="page">
 
   <!-- HEADER -->
-  <div class="header">
-    <div class="header-logo">
-      <div class="logo-icon">📋</div>
-      <div>
-        <div class="logo-text">JJ-Gestión - PYS</div>
-        <div class="logo-sub">Gobierno de Datos e AI</div>
+  <div class="hdr rv">
+    <div class="hbadge">⬡ Comunicado SS · Sur 5</div>
+    <h1 class="htitle">JORNADA EN RUTA<br>#7</h1>
+    <p class="hsub">Ciclovía Bogotá · Módulo 1</p>
+    <div class="hcorredor">📍 Sur 5 — Ciclorruta Porvenir &amp; Av. Guayacanes</div>
+    <div style="margin-top:20px;">
+      <div class="dpill">
+        <span style="opacity:.6;">⬜</span>
+        <div>
+          <div style="font-size:15px;font-weight:700;letter-spacing:.5px;">26 de Abril · 2026</div>
+        </div>
       </div>
     </div>
-    <h1>Verificación de Áreas <br> Paz y Salvo </h1>
-    <p>Complete el formulario para iniciar el proceso. Recibirá notificaciones por email conforme avance.</p>
-    <div class="status-pill">Sistema activo — Procesamiento automático</div>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="progress-bar">
-    <div class="progress-fill" id="progress"></div>
-  </div>
-
-  <!-- FORM -->
-  <form id="mainForm" novalidate>
-    <div class="body" id="formBody">
-
-      <!-- Sección 1: Información del colaborador -->
-      <div class="section-label">Información del colaborador</div>
-
-      <div class="field" id="f-nombre">
-        <label for="nombre">Nombre Completo <span class="req">*</span></label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ej: Jose Giovanni Sarta Valencia" autocomplete="name" />
-        <div class="error-msg">Este campo es obligatorio.</div>
-      </div>
-
-      <div class="row-2">
-        <div class="field" id="f-cedula">
-          <label for="cedula">Número de Documento. <span class="req">*</span></label>
-          <input type="text" id="cedula" name="cedula" placeholder="Ej: 1001001001" inputmode="numeric" />
-          <div class="error-msg">Ingrese un número de cédula válido.</div>
-        </div>
-        <div class="field" id="f-tipo_evento">
-          <label for="tipo_evento">Motivo de retiro <span class="req">*</span></label>
-          <div class="select-wrap">
-            <select id="tipo_evento" name="tipo_evento">
-              <option value="">Seleccionar...</option>
-              <option value="Renuncia Voluntaria">Renuncia Voluntaria</option>
-              <option value="Terminación de Contrato">Terminación de Contrato</option>
-            </select>
-          </div>
-          <div class="error-msg">Seleccione un tipo de evento.</div>
-        </div>
-      </div>
-
-      <div class="field" id="f-email_colaborador">
-        <label for="email_colaborador">Email del Colaborador <span class="req">*</span></label>
-        <input type="email" id="email_colaborador" name="email_colaborador" placeholder="Ej: Jose.Sarta@dominio.com   - correo personal" />
-        <div class="error-msg">Ingrese un correo electrónico válido.</div>
-      </div>
-
-      <!-- Sección 2: Información laboral -->
-      <div class="section-label" style="margin-top:12px;">Información laboral</div>
-
-      <div class="row-2">
-        <div class="field" id="f-cargo">
-          <label for="cargo">Cargo <span class="req">*</span></label>
-          <input type="text" id="cargo" name="cargo" placeholder="Ej: DIRECCION DE INGENIERIA DE SOFTWARE" />
-		  <div class="error-msg">Ingrese el cargo.</div>
-        </div>
-        <div class="field" id="f-area">
-          <label for="area">Área de Trabajo <span class="req">*</span> </label>
-          <input type="text" id="area" name="area" placeholder="Ej: GOBIERNO DE DATOS E AI" />
-		  <div class="error-msg">Ingrese el area de trabajo.</div>
-        </div>
-      </div>
-
-      <div class="row-2">
-        <div class="field" id="f-fecha_retiro">
-          <label for="fecha_retiro">Fecha de Retiro <span class="req">*</span></label>
-          <input type="date" id="fecha_retiro" name="fecha_retiro" />
-          <div class="error-msg">Seleccione la fecha de retiro.</div>
-        </div>
-        <div class="field" id="f-email_jefe">
-          <label for="email_jefe">Email Jefe Inmediato <span class="req">*</span></label>
-          <input type="email" id="email_jefe" name="email_jefe" placeholder="jefe.inmediato@datatools.com.co" />
-		  <div class="error-msg">Ingrese Email del jefe inmediato para poder empezar el proceso.</div>
-        </div>
-      </div>
-
-      <button type="submit" class="submit-btn" id="submitBtn">
-        <span class="btn-text">Enviar Solicitud →</span>
-      </button>
-    </div>
-  </form>
-
-  <!-- SUCCESS -->
-  <div class="success-screen" id="successScreen">
-    <div class="success-icon">✅</div>
-    <div class="success-title">¡Solicitud Enviada!</div>
-    <p class="success-msg">
-      La solicitud ha sido registrada y enviada a todas las áreas para revisión simultánea.<br><br>
-      Recibirá notificaciones por email conforme avance el proceso.
+  <!-- GREETING -->
+  <div class="card rv" style="text-align:center;">
+    <p style="font-size:clamp(13px,2.3vw,18px);font-weight:300;font-style:italic;color:var(--neon);opacity:.9;">
+      ¡Muy buen día, caballeros y señoritas!
     </p>
-    <div class="success-badge">📧 Revise su correo electrónico</div>
+  </div>
+
+  <!-- BETA INVITADA -->
+  <div class="sl rv">Beta de la jornada</div>
+  <div class="beta-card rv">
+    <div class="beta-avatar">👩‍✈️</div>
+    <div class="beta-info">
+      <div class="beta-role">Beta Sur 5 · Jornada #7</div>
+      <div class="beta-name">Angie Sofía Serna Rodríguez</div>
+      <div class="beta-contact">📱 322 216 3898 — Canal de novedades de la jornada</div>
+    </div>
+  </div>
+  <div class="callout rv" style="--clc:var(--lila);margin-bottom:14px;">
+    <span class="cico">📡</span>
+    <span class="ctxt">Todas las novedades que ocurran durante esta jornada deben comunicarse directamente con <strong>Angie.</strong></span>
+  </div>
+
+  <!-- REPORTES -->
+  <div class="dv rv"><div class="ln"></div><div class="dt"></div><div class="dt"></div><div class="dt"></div><div class="ln"></div></div>
+  <div class="sl rv">Reportes del día</div>
+  <div class="rep-grid rv">
+    <div class="rep-item"><span class="riico">📋</span><div class="ritime">08:30</div><div class="rilabel">Asistencia drive<br><span style="opacity:.5;font-size:10px;">Hora máxima</span></div></div>
+    <div class="rep-item"><span class="riico">📔</span><div class="ritime">14:00</div><div class="rilabel">Foto libreta firmada<br><span style="opacity:.5;font-size:10px;">Hora máxima</span></div></div>
+    <div class="rep-item"><span class="riico">📊</span><div class="ritime">16:00</div><div class="rilabel">Reporte 523<br><span style="opacity:.5;font-size:10px;">Hora máxima</span></div></div>
+  </div>
+
+  <div class="dv rv"><div class="ln"></div><div class="dt"></div><div class="dt"></div><div class="dt"></div><div class="ln"></div></div>
+
+  <!-- NOVEDADES -->
+  <div class="sl rv">Novedades · Jornada #7</div>
+
+  <div class="card rv" style="--ca:linear-gradient(90deg,rgba(142,175,212,.35),transparent);">
+    <div class="ch">
+      <div class="ci">🪧</div>
+      <div><div class="ct">Cartelera y actividad</div><div class="cs">Obligatoria · sin excepción</div></div>
+    </div>
+    <ul class="bl">
+      <li><span class="bd bg"></span>Cada servidor debe llegar con su <strong>cartelera preparada desde casa.</strong></li>
+      <li><span class="bd bg"></span>Si el material del IDRD no ha llegado al punto, la cartelera se despliega de inmediato y se ejecuta la campaña.</li>
+      <li><span class="bd bg"></span>En ningún momento un servidor puede estar <strong>sin función.</strong> Si no trae cartelera, el Guardián lo ubica como <strong>punto fijo.</strong></li>
+    </ul>
+  </div>
+
+  <div class="card rv" style="--ca:linear-gradient(90deg,rgba(142,175,212,.35),transparent);">
+    <div class="ch">
+      <div class="ci">👕</div>
+      <div><div class="ct">Uniformidad y conducta</div><div class="cs">Revisión al inicio de jornada</div></div>
+    </div>
+    <ul class="bl">
+      <li><span class="bd bw"></span>Verificar el correcto uso del uniforme en todos los servidores al inicio: jean azul, camiseta blanca por dentro, camibuso negro o blanco, gorra recta del IDRD.</li>
+      <li><span class="bd bw"></span>Servidores ejecutando su actividad en todo momento. 561 de jugar entre ellos o usar aparatos electrónicos.</li>
+      <li><span class="bd bw"></span>Ningún servidor sentado fuera de su horario de descanso.</li>
+    </ul>
+  </div>
+
+  <!-- DRIVE -->
+  <div class="dv rv"><div class="ln"></div><div class="dt"></div><div class="dt"></div><div class="dt"></div><div class="ln"></div></div>
+  <div class="sl rv">Seguimiento Drive · Asistencia</div>
+  <div class="card rv">
+    <div class="ch">
+      <div class="ci">📊</div>
+      <div><div class="ct">Drive M1 · Registro</div><div class="cs">Hoja de asistencia · Sur 5</div></div>
+    </div>
+    <div class="code-row">
+      <div class="cbadge c57">57</div>
+      <div style="font-size:13px;color:var(--dust);">Servidor <strong style="color:var(--neon);">no asistió</strong></div>
+    </div>
+    <div class="code-row" style="margin-top:8px;">
+      <div class="cbadge c58">58</div>
+      <div style="font-size:13px;color:var(--dust);">Servidor <strong style="color:var(--neon);">sí asistió</strong></div>
+    </div>
+    <a href="https://docs.google.com/spreadsheets/d/1FqN_S_XNdC6NYwOa0jXA5UrUljUf4oeA6HPwllNnj9s/edit?gid=0#gid=0"
+       target="_blank" class="drive-row">
+      <span style="font-size:22px;opacity:.7;">📎</span>
+      <div class="drive-info">
+        <div class="drive-t">Asistencia Servidores Sociales · M1</div>
+        <div class="drive-d">Hoja de cálculo · Sur 5</div>
+      </div>
+      <span class="drive-btn">Abrir →</span>
+    </a>
+  </div>
+
+  <div class="dv rv"><div class="ln"></div><div class="dt"></div><div class="dt"></div><div class="dt"></div><div class="ln"></div></div>
+
+  <!-- REGLAMENTO — puntos nuevos -->
+  <div class="sl rv">Reglamento SSEO · Lo que aún no se ha dicho</div>
+  <div class="rv">
+
+    <div class="reg-item" onclick="togReg(this)">
+      <div class="reg-head"><div class="reg-num">01</div>
+        <div class="reg-title">Extravío de gorra o paleta</div>
+        <div class="reg-tag">Trámite</div><div class="reg-arr">▾</div></div>
+      <div class="reg-body"><div class="reg-inner">
+        <p>En caso de extravío de la gorra o paleta del IDRD, el servidor debe presentar una <strong>carta firmada por el acudiente</strong> más la denuncia virtual realizada en la página de la Policía Nacional (A Denunciar). Ambos documentos se envían a <strong>serviciosocial.ciclovia@idrd.gov.co</strong> antes del <strong>jueves siguiente a las 4:00 pm.</strong> El IDRD repone el elemento <strong>una sola vez.</strong> La reincidencia es causal de incumplimiento del SSEO.</p>
+      </div></div>
+    </div>
+
+    <div class="reg-item" onclick="togReg(this)">
+      <div class="reg-head"><div class="reg-num">02</div>
+        <div class="reg-title">Permisos educativos</div>
+        <div class="reg-tag">Plazos</div><div class="reg-arr">▾</div></div>
+      <div class="reg-body"><div class="reg-inner">
+        <p>Se reconocen dos tipos. <strong>Carácter obligatorio</strong> (no requiere reponer la jornada): exámenes ICFES, pruebas de admisión universitaria y eventos intercolegiados — se debe presentar la citación. <strong>Carácter opcional</strong> (debe reponer la jornada): día de la familia, salidas de convivencia y actividades de nivelación. Todos los permisos deben estar <strong>avalados por el docente encargado del SSEO</strong> del colegio y enviarse al correo del programa antes del jueves a las 4:00 pm.</p>
+      </div></div>
+    </div>
+
+    <div class="reg-item" onclick="togReg(this)">
+      <div class="reg-head"><div class="reg-num">03</div>
+        <div class="reg-title">Devolución de prendas al finalizar</div>
+        <div class="reg-tag">Certificación</div><div class="reg-arr">▾</div></div>
+      <div class="reg-body"><div class="reg-inner">
+        <p>Al terminar el módulo, el servidor debe devolver la <strong>gorra y la paleta</strong> suministradas por el IDRD, limpias, dobladas y empacadas en bolsa transparente. Esta devolución se realiza en la <strong>jornada de retroalimentación.</strong> Sin devolución, el proceso de <strong>certificación queda suspendido</strong> hasta que se subsane la novedad. La certificación se entrega únicamente al docente encargado del SSEO del colegio.</p>
+      </div></div>
+    </div>
+
+    <div class="reg-item" onclick="togReg(this)">
+      <div class="reg-head"><div class="reg-num">04</div>
+        <div class="reg-title">Prohibiciones específicas en el corredor</div>
+        <div class="reg-tag">561</div><div class="reg-arr">▾</div></div>
+      <div class="reg-body"><div class="reg-inner">
+        <p>Está <strong>prohibido</strong> que los servidores: coordinen el tránsito vehicular (su función es exclusivamente con usuarios de Ciclovía), salgan del corredor con personas ajenas al programa, se desplacen en bicicleta durante la jornada (incluso en los descansos), y transporten pasajeros en bicicleta. Cualquier situación inusual debe reportarse al Guardián de inmediato.</p>
+      </div></div>
+    </div>
+
+    <div class="reg-item" onclick="togReg(this)">
+      <div class="reg-head"><div class="reg-num">05</div>
+        <div class="reg-title">Tratamiento de datos y registro audiovisual</div>
+        <div class="reg-tag">Autorización</div><div class="reg-arr">▾</div></div>
+      <div class="reg-body"><div class="reg-inner">
+        <p>Al inscribirse en el SSEO, el estudiante y su acudiente autorizan al IDRD el uso de fotografías y videos de la actividad para fines institucionales legítimos. Sin embargo, <strong>nadie del corredor fuera del equipo Alfa 12</strong> puede grabar o fotografiar a los servidores, y los propios servidores <strong>561</strong> de grabarse durante sus actividades, especialmente cuando hay menores de edad participando.</p>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- BOTÓN WA -->
+  <div class="rv" style="text-align:center;margin-top:28px;margin-bottom:14px;">
+    <p style="font-size:11.5px;color:var(--muted);margin-bottom:14px;">
+      ¿Ya leíste el comunicado? Confirma tu lectura al Beta.
+    </p>
+    <a id="btnWA"
+       href="https://wa.me/573232043421?text=✅%20Leí%20el%20comunicado%20Jornada%20%237%20–%2026%20de%20abril."
+       target="_blank" onclick="confirmRead()"
+       style="display:inline-flex;align-items:center;gap:10px;
+         padding:13px 28px;border-radius:50px;
+         background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.35);
+         color:#e8f4ff;font-family:'Orbitron',sans-serif;
+         font-size:10.5px;letter-spacing:2px;text-transform:uppercase;
+         text-decoration:none;transition:all .25s;">
+      <span style="font-size:20px;">💬</span>
+      <span id="btnLabel">Confirmar lectura</span>
+    </a>
+    <p id="btnDone" style="display:none;font-size:12px;color:var(--ok);margin-top:10px;opacity:.85;">
+      ✅ Confirmación enviada — gracias.
+    </p>
+  </div>
+
+  <!-- FINAL -->
+  <div class="final rv">
+    <span class="ficon">⬡</span>
+    <p>Jornada #7 — <strong>actitud, presencia y servicio.</strong><br>
+    Nos vemos en el corredor.</p>
   </div>
 
   <!-- FOOTER -->
-  <div class="footer">
-    <span class="footer-brand">© JJ - Gestión — PYS - Gobierno de Datos e AI</span>
-    <span class="footer-secure">🔒 Envío seguro</span>
+  <div class="footer rv">
+    <div class="footer-name">Angie Sofía Serna Rodríguez · Beta Sur 5 · 322 216 3898</div>
+    <div class="footer-sub">Beta de jornada · 26 de Abril 2026</div>
+    <div class="footer-div"></div>
+    <div class="footer-name">John Fredy Jimenez Rincon · Beta Sur 5 · 3232043421</div>
+    <div class="footer-sub" style="margin-bottom:0;">jimenez.rincon.john.fredy@outlook.com · John Jimenez © 2026 · Todos los derechos reservados</div>
   </div>
+
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  // ── Webhook URL ──
-  const WEBHOOK_URL = 'https://n8n_srv1.datatools.com.co/webhook/paz-y-salvo';
-
-  const form = document.getElementById('mainForm');
-  const submitBtn = document.getElementById('submitBtn');
-  const progressFill = document.getElementById('progress');
-  const formBody = document.getElementById('formBody');
-  const successScreen = document.getElementById('successScreen');
-
-  // TODOS los campos obligatorios
-  const requiredFields = [
-    'nombre',
-    'cedula',
-    'tipo_evento',
-    'email_colaborador',
-    'cargo',
-    'area',
-    'fecha_retiro',
-    'email_jefe'
-  ];
-
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  function isValidField(id) {
-    const el = document.getElementById(id);
-    if (!el) return false;
-
-    const value = el.value.trim();
-
-    if (!value) return false;
-
-    if (id === 'cedula') {
-      return /^\d+$/.test(value);
-    }
-
-    if (id === 'email_colaborador' || id === 'email_jefe') {
-      return validateEmail(value);
-    }
-
-    return true;
-  }
-
-  function updateProgress() {
-  let filled = 0;
-
-  requiredFields.forEach(id => {
-    if (isValidField(id)) filled++;
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');
+function rsz(){cv.width=innerWidth;cv.height=innerHeight;}rsz();addEventListener('resize',rsz);
+const st=[];
+for(let i=0;i<180;i++)st.push({x:Math.random()*99999,y:Math.random()*99999,r:Math.random()*1.1+.15,blue:Math.random()>.7});
+let T=0;
+(function draw(){
+  cx.clearRect(0,0,cv.width,cv.height);T+=.007;
+  st.forEach((s,i)=>{
+    const a=.12+.3*Math.abs(Math.sin(T+i*.31));
+    cx.beginPath();cx.arc(s.x%cv.width,s.y%cv.height,s.r,0,Math.PI*2);
+    cx.fillStyle=s.blue?`rgba(160,180,220,${a})`:`rgba(220,225,240,${a})`;cx.fill();
   });
-
-  const percent = (filled / requiredFields.length) * 100;
-  progressFill.style.width = percent + '%';
-
-  // 🔒 Deshabilitar hasta que esté al 100%
-  if (filled === requiredFields.length) {
-    submitBtn.disabled = false;
-    submitBtn.classList.remove('disabled');
-  } else {
-    submitBtn.disabled = true;
-    submitBtn.classList.add('disabled');
-   }
+  requestAnimationFrame(draw);
+})();
+function confirmRead(){
+  localStorage.setItem('read_j7_26abril','1');
+  document.getElementById('btnLabel').textContent='Confirmación enviada';
+  const btn=document.getElementById('btnWA');
+  btn.style.opacity='.4';btn.style.pointerEvents='none';
+  document.getElementById('btnDone').style.display='block';
+}
+window.addEventListener('load',function(){
+  if(localStorage.getItem('read_j7_26abril')){
+    document.getElementById('btnLabel').textContent='Ya confirmaste tu lectura';
+    const btn=document.getElementById('btnWA');
+    btn.style.opacity='.4';btn.style.pointerEvents='none';
+    document.getElementById('btnDone').style.display='block';
   }
-
-  document.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('input', updateProgress);
-    el.addEventListener('change', updateProgress);
-  });
-
-  function setError(fieldId, show) {
-    const wrapper = document.getElementById('f-' + fieldId);
-    const input = document.getElementById(fieldId);
-    if (!wrapper || !input) return;
-
-    if (show) {
-      wrapper.classList.add('has-error');
-      input.classList.remove('valid');
-      input.classList.add('error');
-    } else {
-      wrapper.classList.remove('has-error');
-      input.classList.remove('error');
-      input.classList.add('valid');
-    }
-  }
-
-  function validate() {
-    let valid = true;
-
-    requiredFields.forEach(id => {
-      if (!isValidField(id)) {
-        setError(id, true);
-        valid = false;
-      } else {
-        setError(id, false);
-      }
-    });
-
-    return valid;
-  }
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!validate()) return;
-
-    submitBtn.disabled = true;
-    submitBtn.classList.add('loading');
-    submitBtn.querySelector('.btn-text').textContent = 'Enviando solicitud...';
-
-    const payload = {
-      nombre: document.getElementById('nombre').value.trim(),
-      cedula: document.getElementById('cedula').value.trim(),
-      tipo_evento: document.getElementById('tipo_evento').value,
-      email_colaborador: document.getElementById('email_colaborador').value.trim(),
-      cargo: document.getElementById('cargo').value.trim(),
-      area_trabajo: document.getElementById('area').value.trim(),
-      fecha_retiro: document.getElementById('fecha_retiro').value,
-      email_jefe_inmediato: document.getElementById('email_jefe').value.trim()
-    };
-
-    try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) throw new Error();
-
-      formBody.style.display = 'none';
-      successScreen.style.display = 'block';
-      progressFill.style.width = '100%';
-
-    } catch (err) {
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('loading');
-      submitBtn.querySelector('.btn-text').textContent = 'Enviar Solicitud →';
-      alert('⚠️ Hubo un error al enviar la solicitud. Por favor intente nuevamente o contacte a soporte.');
-    }
-  });
-
-  updateProgress(); // inicializa barra
-
 });
+function togReg(el){
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.reg-item').forEach(i=>i.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ob.unobserve(x.target);}});},{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
 </script>
 </body>
 </html>
